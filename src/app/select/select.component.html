@@ -1,0 +1,16 @@
+<div class="container">
+    <img src="https://api.chucknorris.io/img/chucknorris_logo_coloured_small@2x.png" alt="Chuck Norris">
+    <div class="content">
+      <div class="category">
+        <select [(ngModel)]="selectedCategory">
+          <option value="">Select a category</option>
+          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+        </select>
+      </div>
+      <div class="btn">
+        <button (click)="getRandomJoke()">Get Random Joke</button>
+      </div>
+    </div>
+    <p class="joke">{{ joke }}</p>
+  </div>
+  
