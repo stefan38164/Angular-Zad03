@@ -1,32 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ApiService } from './api.service';
 
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
-  styleUrls: ['./select.component.css']
+  styleUrls: ['./select.component.css'],
 })
 export class SelectComponent implements OnInit {
-  selectedCategory= '';
-  categories!: string[];
-  joke!: string ;
+  categories = [''];
+  joke = '';
+  jokeForm!: FormGroup;
 
-  constructor(private http: HttpClient) { }
- 
-  ngOnInit() {
+  constructor(private ApiService: ApiService) {}
+
+  ngOnInit(): void {
     this.getCategories();
-  }
-  getCategories() {
-    this.http.get<string[]>('https://api.chucknorris.io/jokes/categories')
-      .subscribe(categories => this.categories = categories);
+    this.jokeForm = new FormGroup({
+      'selectedCategory': new FormControl(''),
+    });
   }
 
-  getRandomJoke() {
-    const apiUrl = this.selectedCategory ?
-      `https://api.chucknorris.io/jokes/random?category=${this.selectedCategory}` :
-      'https://api.chucknorris.io/jokes/random';
+  getCategories(): void {
+    this.ApiService.getCategories().subscribe((categories: string[]) => {
+      this.categories = categories;
+    });
+  }
 
-    this.http.get<{ value: string }>(apiUrl)
-      .subscribe(response => this.joke = response.value);
+  getRandomJoke(): void {
+    const category = this.jokeForm.get('selectedCategory')?.value;
+    this.ApiService.getRandomJoke(category).subscribe(
+      (response: { value: string }) => (this.joke = response.value)
+    );
   }
 }

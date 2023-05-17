@@ -1,17 +1,16 @@
 .container {
-  display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
 }
-
-.content {
+.flex {
   display: flex;
   align-items: center;
+}
+.content {
   margin-top: 16px;
 }
 
-.category {
+.category-container {
   margin-right: 8px;
 }
 
@@ -22,11 +21,11 @@ select {
   border-radius: 4px;
 }
 
-.btn {
+.btn-container {
   margin-left: 8px;
 }
 
-.btn button {
+.btn-container button {
   padding: 8px 16px;
   font-size: 16px;
   background-color: #007bff;
@@ -37,12 +36,11 @@ select {
 }
 
 .joke {
-  margin-top: 50px;
-  margin-left: 20px;
+  margin: 50px 0 0 20px;
   font-size: 1.3rem;
   font-family: sans-serif;
 }
-.container img {
+.img-container{
   max-width: 400px;
   margin-bottom: 16px;
 }
