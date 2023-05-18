@@ -1,0 +1,24 @@
+<div class="flex container" >
+  <div class="img-container">
+    <img
+      src="https://api.chucknorris.io/img/chucknorris_logo_coloured_small@2x.png"
+      alt="Image of Chuck Norris"
+      width="100%"
+      height="100%"
+    />
+  </div>
+  <div class="flex content">
+    <div class="category-container" [formGroup]="jokeForm">
+      <select formControlName="selectedCategory">
+        <option value="">Select a category</option>
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>    
+    <div class="btn-container">
+      <button (click)="getRandomJoke()">Get Random Joke</button>
+    </div>
+  </div>
+  <p class="joke">{{ joke }}</p>
+</div>
